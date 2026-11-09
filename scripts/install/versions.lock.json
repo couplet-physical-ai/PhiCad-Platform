@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "lock_schema_version": 1,
+  "platform_version": "0.1.0-dev.1",
+  "release_channel": "developer-preview",
+  "harness": {
+    "name": "Phi",
+    "requirement": "any separately installed Phi with stdio MCP support",
+    "sole_ai_harness": true,
+    "embedded_agent_runtime": false,
+    "bundled": false
+  },
+  "tools": {
+    "phicad-platform": {
+      "version": "0.1.0-dev.1",
+      "source": "https://github.com/couplet-physical-ai/PhiCad-Platform.git"
+    },
+    "kicad": {
+      "version": "10.99.0",
+      "source": "https://gitlab.com/kicad/code/kicad.git",
+      "bundled": false
+    },
+    "tscircuit": {
+      "version": "0.0.2561",
+      "source": "https://www.npmjs.com/package/tscircuit",
+      "bundled": false
+    },
+    "@tscircuit/core": {
+      "version": "0.0.1914",
+      "source": "https://www.npmjs.com/package/@tscircuit/core",
+      "bundled": false
+    },
+    "@tscircuit/eval": {
+      "version": "0.0.1407",
+      "source": "https://www.npmjs.com/package/@tscircuit/eval",
+      "bundled": false,
+      "load_policy": "lazy-worker-only"
+    },
+    "@tscircuit/cli": {
+      "version": "0.1.2084",
+      "source": "https://www.npmjs.com/package/@tscircuit/cli",
+      "bundled": false
+    },
+    "circuit-json": {
+      "version": "0.0.491",
+      "source": "https://www.npmjs.com/package/circuit-json",
+      "bundled": false
+    },
+    "phicad": {
+      "version": "0.1.0-dev.1",
+      "source": "https://github.com/couplet-physical-ai/PhiCad.git",
+      "commit": "b1d0d05cd8d699325d3ea04ee40855774097ef84",
+      "native_authority": "phicad",
+      "artifact_status": "no published artifact; build from source at b1d0d05cd8d699325d3ea04ee40855774097ef84",
+      "bundled": false
+    }
+  }
+}

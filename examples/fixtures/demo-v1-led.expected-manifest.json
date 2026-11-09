@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "example": "examples/demo-v1-led.tsx",
+  "purpose": "Expected artifact contract for the reproducible V1 demo harness.",
+  "required_paths": [
+    "inputs/demo-v1-led.tsx",
+    "inputs/fixtures/demo-v1-led.expected-manifest.json",
+    "inputs/fixtures/demo-v1-led.expected-diagnostics.json",
+    "outputs/engine-check.json",
+    "outputs/build-verify.json",
+    "commands.jsonl",
+    "tool-versions.json",
+    "diagnostics.json",
+    "manifest.json",
+    "run.json"
+  ],
+  "required_command_labels": [
+    "engine-version",
+    "engine-check",
+    "build-and-verify"
+  ],
+  "hashes": {
+    "algorithm": "sha256",
+    "scope": "Every regular file in the run directory except manifest.json itself; command stdout/stderr are included."
+  },
+  "fresh_run": {
+    "must_not_overwrite_existing_directory": true,
+    "run_id_is_volatile": true,
+    "timestamps_and_durations_are_volatile": true
+  },
+  "limitations": [
+    "A generated run is evidence of this tool invocation, not a fabrication-readiness verdict.",
+    "This harness does not materialize or claim a native PhiCad revision.",
+    "The engine and verifier may report failures; capture success is not design success."
+  ]
+}

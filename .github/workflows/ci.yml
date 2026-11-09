@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# PR checks use only public dependencies and read-only source access.
+# No registry, cloud, or organization credentials are required.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install project and CI tools
+        run: make ci-install
+      - name: Lint Python
+        run: make lint
+      - name: Run unit tests
+        run: python -m pytest -vv -m 'not mcp' release/tests tests/unit
+      - name: Run MCP tests
+        run: make test-mcp
+      - name: Test isolated installation
+        run: make install-test
+
+  exact-lock:
+    name: Exact external-component lock
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate versions.lock
+        run: make validate-lock
+
+  docs:
+    name: Strict documentation build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install documentation builder when configured
+        run: |
+          if [ -f mkdocs.yml ] || [ -f mkdocs.yaml ]; then
+            python -m pip install --disable-pip-version-check mkdocs-material
+          fi
+      - name: Build docs with warnings as errors
+        run: make docs-strict
+
+  shellcheck:
+    name: Shellcheck (when available)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Check shell scripts
+        shell: bash
+        run: |
+          mapfile -t scripts < <(find . -type f -name '*.sh' \
+            -not -path './.git/*' -not -path './release/dist/*' -print)
+          if [ "${#scripts[@]}" -eq 0 ]; then
+            echo 'No shell scripts found'
+          elif command -v shellcheck >/dev/null 2>&1; then
+            shellcheck --severity=warning "${scripts[@]}"
+          else
+            echo 'shellcheck is not installed on this runner; skipping'
+          fi
+
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Scan source and release inputs
+        run: make secret-scan

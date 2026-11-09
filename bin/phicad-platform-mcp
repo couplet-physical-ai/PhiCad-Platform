@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Launch the installed PhiCad Platform stdio MCP module."""
+
+from __future__ import annotations
+
+from contextlib import redirect_stdout
+import importlib
+import importlib.machinery
+import importlib.util
+from pathlib import Path
+import sys
+import types
+
+
+def _main():
+    try:
+        with redirect_stdout(sys.stderr):
+            return importlib.import_module("phicad_platform.mcp_server").main
+    except ModuleNotFoundError as error:
+        # A package can be installed while its optional core imports are still
+        # being assembled.  Resolve the installed package directory directly
+        # in that case, without importing or modifying any provider settings.
+        if not (error.name and error.name.startswith("phicad_platform.")):
+            raise
+        import_error = error
+
+    package_spec = importlib.machinery.PathFinder.find_spec("phicad_platform", sys.path)
+    if package_spec is None or not package_spec.submodule_search_locations:
+        raise import_error
+    package_dir = Path(next(iter(package_spec.submodule_search_locations)))
+    module_path = package_dir / "mcp_server.py"
+    if not module_path.is_file():
+        raise import_error
+
+    # Load just the two owned MCP modules under a package shell.  This fallback
+    # is only for a partially assembled package; normal installed imports use
+    # the package's ordinary __init__ path above.
+    package = types.ModuleType("phicad_platform")
+    package.__path__ = [str(package_dir)]
+    package.__package__ = "phicad_platform"
+    sys.modules["phicad_platform"] = package
+    spec = importlib.util.spec_from_file_location("phicad_platform.mcp_server", module_path)
+    if spec is None or spec.loader is None:
+        raise ImportError("cannot load phicad_platform.mcp_server")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    with redirect_stdout(sys.stderr):
+        spec.loader.exec_module(module)
+    return module.main
+
+
+if __name__ == "__main__":
+    raise SystemExit(_main()())

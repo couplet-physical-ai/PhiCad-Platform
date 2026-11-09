@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "example": "examples/demo-v2-i2c-power-conditioner.tsx",
+  "purpose": "Expected artifact contract for the electrically complete V2 I2C power-conditioner example.",
+  "source_sha256": "103de94521df57b1c528d50f2636fee8c367054628b2e2506e9bf717359b1edb",
+  "toolchain": {
+    "engine_package": "@phicad/core 0.1.0",
+    "tscircuit": "0.0.2561",
+    "circuit_json": "0.0.491",
+    "kicad_cli": "10.99.0"
+  },
+  "expected_circuit": {
+    "elements": 315,
+    "components": 11,
+    "pads": 17,
+    "traces": 19,
+    "vias": 6,
+    "nets": 6,
+    "width_mm": 45,
+    "height_mm": 25,
+    "layers": 2
+  },
+  "observed_board_export": {
+    "sha256": "067d1adff5303d864d7b78448a6f8969e71be591f6aa1273d86bbe71c02de020",
+    "command": "/opt/homebrew/bin/bun /path/to/phicad/core/cli.mjs export examples/demo-v2-i2c-power-conditioner.tsx -f kicad_pcb -o /tmp/phicad-v2-evidence/board.kicad_pcb",
+    "observation_date": "2026-09-15",
+    "hash_scope": "The complete exported .kicad_pcb file from the recorded real run.",
+    "non_repeatability": "The engine currently assigns fresh UUIDs to generated mounting-hole footprints on each export. The source SHA and the verified circuit/DRC counts are stable, but a new export has a different whole-file SHA-256. Therefore e2e validates source and diagnostics, not this observed whole-file hash."
+  },
+  "required_inputs": [
+    "examples/demo-v2-i2c-power-conditioner.tsx",
+    "examples/fixtures/demo-v2-i2c-power-conditioner.expected-diagnostics.json",
+    "examples/fixtures/demo-v2-i2c-power-conditioner.expected-manifest.json"
+  ],
+  "verification_contract": {
+    "Circuit Engine": "0 errors and 0 warnings",
+    "KiCad DRC": "0 errors; the 23 known generated-environment/presentation warnings are retained and enumerated by the diagnostics fixture",
+    "unconnected_items": 0,
+    "copper_layers": [
+      "top",
+      "bottom"
+    ]
+  },
+  "limitations": [
+    "This is an evaluation-only reference, not a fabrication-approved board.",
+    "The real-run board SHA is evidence for its recorded export only because mounting-hole UUIDs are regenerated.",
+    "The direct toolchain check does not materialize or synchronize a native PhiCad revision."
+  ]
+}

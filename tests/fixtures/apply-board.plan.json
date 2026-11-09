@@ -1,0 +1,32 @@
+{
+  "circuit_json_hash": "e4676fdb13cb0240f1422f4a36bd18161b477fd84005a02e86f603bce626108a",
+  "counts": {
+    "components": 0,
+    "nets": 0,
+    "pads": 0,
+    "traces": 0,
+    "vias": 0,
+    "zones": 0
+  },
+  "coverage": {
+    "rejected": [],
+    "supported": [
+      "pcb_board"
+    ]
+  },
+  "operations": [],
+  "plan_hash": "f9cc1f693b8b909763deb5a4e5bb20b6e38f92817129ebb6b2f5e07035a320bc",
+  "project": {
+    "base_board_hash": null,
+    "base_revision": null,
+    "path": "/private/tmp/phicad-platform-plan-fixture/project"
+  },
+  "rejections": [],
+  "schema": "io.github.couplet-physical-ai.phicad.apply-plan/v1",
+  "status": "planned",
+  "tool_versions": {
+    "kicad_cli": "unknown",
+    "phicad": "native-apply-v1",
+    "tscircuit_circuit_json": "unknown"
+  }
+}

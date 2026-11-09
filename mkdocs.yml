@@ -1,0 +1,68 @@
+site_name: PhiCad Platform
+site_description: Developer-preview documentation for the PhiCad Platform
+site_author: PhiCad
+repo_url: https://github.com/couplet-physical-ai/PhiCad-Platform
+edit_uri: edit/main/docs/
+docs_dir: docs
+strict: true
+
+nav:
+  - Overview: index.md
+  - Product:
+      - Architecture and ownership: architecture/overview.md
+      - Authority modes: reference/authority-modes.md
+      - Phi and MCP: reference/phi-and-mcp.md
+      - Cross-view links: reference/cross-view-links.md
+      - Manifests and synchronization: reference/manifests-and-sync.md
+      - Security and threat model: security/threat-model.md
+      - V1 limitations: reference/v1-limitations.md
+      - Upstream attribution: reference/upstream-attribution.md
+  - Guides:
+      - Install the developer preview: guides/install.md
+      - First project: guides/first-project.md
+      - Complete example board: guides/examples.md
+      - Updates and rollback: guides/updates-and-rollback.md
+      - Troubleshooting: guides/troubleshooting.md
+  - Legal and notices:
+      - Release licensing: legal/release-licensing.md
+      - Distribution boundaries: legal/distribution-boundaries.md
+      - Naming and attribution: legal/naming.md
+      - Third-party inventory: legal/third-party-inventory.md
+      - Third-party notices: legal/third-party-notices.md
+  - Contributing:
+      - Release process: contributing/release-process.md
+      - Repository map: contributing/repo-map.md
+  - Decisions:
+      - PhiCad native Studio and Verify: decisions/0002-phicad-native-studio-and-verify.md
+      - Separate repositories, one bundle (superseded): decisions/0001-separate-repositories-one-bundle.md
+
+theme:
+  name: material
+  language: en
+  font: false
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true

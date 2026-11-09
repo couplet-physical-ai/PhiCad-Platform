@@ -1,0 +1,54 @@
+name: Developer preview package
+
+# Deliberately manual: this workflow creates a reviewable artifact only. It never
+# creates a GitHub Release, publishes to a registry, or consumes organization secrets.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact developer-preview semantic version
+        required: true
+        default: 0.1.0-dev.1
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: developer-preview-package-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Build checksumed developer preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate lock and scan for credentials
+        run: |
+          make validate-lock
+          make secret-scan
+      - name: Build reproducible package
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          make package VERSION="$RELEASE_VERSION"
+          make package-verify VERSION="$RELEASE_VERSION"
+      - name: Upload package artifacts for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: phicad-platform-${{ inputs.version }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            release/dist/*.tar.gz
+            release/dist/*.sha256
+            release/dist/release-manifest.json
+            release/dist/component-inventory.json

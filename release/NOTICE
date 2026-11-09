@@ -1,0 +1,8 @@
+PhiCad Platform
+Copyright 2026 Exowatt, Inc.
+
+Created at Exowatt, Inc. (https://exowatt.com). The original Platform glue is
+licensed under the Apache License, Version 2.0. Third-party components and
+separate programs keep their own licenses; see THIRD_PARTY_NOTICES.md and
+LICENSES/. Neither the PhiCad GPL nor the Circuit Engine MIT/Circuit JSON ISC
+notices are replaced by the Platform license.

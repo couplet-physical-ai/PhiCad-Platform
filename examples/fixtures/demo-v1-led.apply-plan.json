@@ -1,0 +1,177 @@
+{
+  "circuit_json_hash": "3f3a7aa3d3a5f1c83dd11615813eba94e235f8878dc3e437c5e60a780b41d402",
+  "counts": {
+    "components": 2,
+    "nets": 1,
+    "pads": 4,
+    "traces": 1,
+    "vias": 0,
+    "zones": 0
+  },
+  "coverage": {
+    "rejected": [
+      "pcb_trace",
+      "schematic_component",
+      "schematic_group",
+      "schematic_port",
+      "schematic_trace"
+    ],
+    "supported": [
+      "cad_component",
+      "pcb_board",
+      "pcb_component",
+      "pcb_courtyard_rect",
+      "pcb_fabrication_note_path",
+      "pcb_port",
+      "pcb_silkscreen_path",
+      "pcb_silkscreen_text",
+      "pcb_smtpad",
+      "pcb_solder_paste",
+      "schematic_missing_sheet_warning",
+      "schematic_text",
+      "source_board",
+      "source_component",
+      "source_group",
+      "source_pin_missing_trace_warning",
+      "source_port",
+      "source_project_metadata",
+      "source_trace",
+      "supplier_footprint_mismatch_warning"
+    ]
+  },
+  "operations": [
+    {
+      "at_nm": [
+        13000000,
+        6000000
+      ],
+      "layer": "F.Cu",
+      "op": "create_footprint",
+      "ref": "D1",
+      "rotation_deg": 0
+    },
+    {
+      "at_nm": [
+        5000000,
+        6000000
+      ],
+      "layer": "F.Cu",
+      "op": "create_footprint",
+      "ref": "R1",
+      "rotation_deg": 0
+    },
+    {
+      "name": "series",
+      "op": "create_net",
+      "pins": [
+        "D1.1",
+        "R1.2"
+      ]
+    },
+    {
+      "element": "pcb_courtyard_rect",
+      "op": "ignore_element",
+      "reason": "courtyard is emitted by the native footprint for the package the pads pin exactly"
+    },
+    {
+      "element": "pcb_fabrication_note_path",
+      "op": "ignore_element",
+      "reason": "fabrication note is visual annotation, not native copper or connectivity"
+    },
+    {
+      "element": "pcb_silkscreen_path",
+      "op": "ignore_element",
+      "reason": "package silkscreen is emitted by the native footprint"
+    },
+    {
+      "element": "pcb_silkscreen_text",
+      "op": "ignore_element",
+      "reason": "the reference designator is emitted natively by the synth silk stage"
+    },
+    {
+      "element": "pcb_solder_paste",
+      "op": "ignore_element",
+      "reason": "paste apertures are generated from the native footprint's own pads"
+    },
+    {
+      "element": "schematic_missing_sheet_warning",
+      "op": "ignore_element",
+      "reason": "engine diagnostic; the native schematic has its own sheet"
+    },
+    {
+      "element": "schematic_text",
+      "op": "ignore_element",
+      "reason": "purely visual schematic annotation; native title/net labels are regenerated"
+    },
+    {
+      "element": "source_board",
+      "op": "ignore_element",
+      "reason": "PCB board geometry is authoritative"
+    },
+    {
+      "element": "source_group",
+      "op": "ignore_element",
+      "reason": "group identity is not native board geometry"
+    },
+    {
+      "element": "source_pin_missing_trace_warning",
+      "op": "ignore_element",
+      "reason": "engine diagnostic; an unconnected port is represented as no-connect"
+    },
+    {
+      "element": "source_project_metadata",
+      "op": "ignore_element",
+      "reason": "engine provenance metadata is not native board geometry"
+    },
+    {
+      "element": "supplier_footprint_mismatch_warning",
+      "op": "ignore_element",
+      "reason": "engine diagnostic; native footprint geometry is checked separately"
+    },
+    {
+      "element": "cad_component.position.z",
+      "op": "ignore_field",
+      "reason": "the native footprint's own (model ...) placement is authoritative and is preserved exactly, because footprints are never rewritten"
+    }
+  ],
+  "plan_hash": "32858d81620c58199d2a69abf2206c02ba23fd6ef39072f3f61b1095d48babd2",
+  "project": {
+    "base_board_hash": "8e6067d5f987b8639ec80015cea94e5ae5b755846e2754af9f50e5c4cd447bdb",
+    "base_revision": null,
+    "path": "/private/tmp/phicad-platform-v3-evidence/native"
+  },
+  "rejections": [
+    {
+      "code": "unsupported_required_geometry",
+      "detail": "Circuit JSON copper route is not representable by Design IR routing",
+      "element": "pcb_trace"
+    },
+    {
+      "code": "unsupported_required_geometry",
+      "detail": "schematic layout is not representable by the synth schematic emitter",
+      "element": "schematic_component"
+    },
+    {
+      "code": "unsupported_required_geometry",
+      "detail": "schematic layout is not representable by the synth schematic emitter",
+      "element": "schematic_group"
+    },
+    {
+      "code": "unsupported_required_geometry",
+      "detail": "schematic layout is not representable by the synth schematic emitter",
+      "element": "schematic_port"
+    },
+    {
+      "code": "unsupported_required_geometry",
+      "detail": "schematic layout is not representable by the synth schematic emitter",
+      "element": "schematic_trace"
+    }
+  ],
+  "schema": "io.github.couplet-physical-ai.phicad.apply-plan/v1",
+  "status": "rejected",
+  "tool_versions": {
+    "kicad_cli": "unknown",
+    "phicad": "native-apply-v1",
+    "tscircuit_circuit_json": "unknown"
+  }
+}

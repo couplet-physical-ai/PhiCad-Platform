@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "example": "examples/demo-v2-i2c-power-conditioner.tsx",
+  "fixture_status": "observed-current-reference",
+  "observed_reference": {
+    "engine_package": "@phicad/core 0.1.0",
+    "tscircuit": "0.0.2561",
+    "circuit_json": "0.0.491",
+    "kicad_cli": "10.99.0",
+    "observation": "A real pinned-tool run on 2026-09-15 produced 0 Circuit Engine errors and 0 Circuit Engine warnings. KiCad DRC produced 0 errors and 23 warnings: 13 generated-library registration warnings, 9 generated reference-text-height warnings, and 1 generated silkscreen-overlap warning. The warnings are retained, not suppressed; see known_findings."
+  },
+  "expected": {
+    "engine_check": {
+      "exit_code": 0,
+      "ok": true,
+      "circuit": {
+        "elements": 315,
+        "components": 11,
+        "pads": 17,
+        "traces": 19,
+        "vias": 6,
+        "nets": 6,
+        "width_mm": 45,
+        "height_mm": 25
+      },
+      "engine_errors": 0,
+      "engine_warnings": 0,
+      "finding_codes": []
+    },
+    "build_and_verify_with_pinned_kicad": {
+      "exit_code": 0,
+      "ok": true,
+      "engine_ok": true,
+      "engine_errors": 0,
+      "engine_warnings": 0,
+      "engine_finding_codes": [],
+      "verification_ok": true,
+      "verification_skipped": false,
+      "verification_errors": 0,
+      "verification_warnings": 23,
+      "verification_finding_codes": {
+        "drc.lib_footprint_issues": 13,
+        "drc.silk_overlap": 1,
+        "drc.text_height": 9
+      }
+    }
+  },
+  "known_findings": [
+    {
+      "code": "drc.lib_footprint_issues",
+      "severity": "warning",
+      "count": 13,
+      "meaning": "The pinned KiCad environment used for the check does not register the generated tscircuit footprint library, including the two generated mounting-hole footprints.",
+      "action": "Register or embed the generated footprint library before interactive library editing; this run does not suppress the warning."
+    },
+    {
+      "code": "drc.text_height",
+      "severity": "warning",
+      "count": 9,
+      "meaning": "The engine emits generated reference fields at 0.4 mm, 0.5 mm, or 0.7 mm while this KiCad profile requires 0.8 mm silkscreen text.",
+      "action": "Adjust generated reference-field text in the engine/export path before treating the board as a production presentation."
+    },
+    {
+      "code": "drc.silk_overlap",
+      "severity": "warning",
+      "count": 1,
+      "meaning": "The generated U1 reference field overlaps the generated C1 F.Silkscreen segment.",
+      "action": "Resolve the generated reference-field placement in the engine/export path; it is not waived or suppressed here."
+    }
+  ],
+  "claims_not_made": [
+    "This evaluation-only example is not fabrication-ready, a manufacturability verdict, or a signed release.",
+    "Zero KiCad DRC errors does not establish electrical correctness, safety qualification, or manufacturing acceptance.",
+    "V1 native PhiCad materialization remains unavailable; this TSX verification run does not create an applied native revision.",
+    "The board conditions a 5 V host supply and I2C bus; it is not a USB-C sink, a battery charger, or a mains-connected circuit."
+  ]
+}

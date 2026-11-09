@@ -1,0 +1,14 @@
+[
+  {
+    "type": "pcb_board",
+    "pcb_board_id": "board",
+    "center": {
+      "x": 0,
+      "y": 0
+    },
+    "width": 20,
+    "height": 15,
+    "thickness": 1.6,
+    "num_layers": 2
+  }
+]

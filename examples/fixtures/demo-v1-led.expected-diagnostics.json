@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "example": "examples/demo-v1-led.tsx",
+  "fixture_status": "observed-current-reference",
+  "observed_reference": {
+    "engine_package": "@phicad/core 0.1.0",
+    "tscircuit": "0.0.2561",
+    "circuit_json": "0.0.491",
+    "kicad_cli": "10.99.0",
+    "observation": "The intentionally incomplete one-net series fragment evaluates successfully. Circuit Engine reports five explicit warnings. With the pinned PhiCad kicad-cli, independent KiCad DRC reports zero errors and four environment/presentation warnings. Missing kicad-cli remains a non-pass skip."
+  },
+  "expected": {
+    "engine_check": {
+      "exit_code": 0,
+      "ok": true,
+      "finding_codes": [
+        "tsc.schematic_missing_sheet_warning",
+        "tsc.source_pin_missing_trace_warning",
+        "tsc.source_pin_missing_trace_warning",
+        "tsc.supplier_footprint_mismatch_warning",
+        "tsc.supplier_footprint_mismatch_warning"
+      ]
+    },
+    "build_and_verify": {
+      "exit_code": 1,
+      "ok": false,
+      "engine_ok": true,
+      "engine_finding_codes": [
+        "tsc.schematic_missing_sheet_warning",
+        "tsc.source_pin_missing_trace_warning",
+        "tsc.source_pin_missing_trace_warning",
+        "tsc.supplier_footprint_mismatch_warning",
+        "tsc.supplier_footprint_mismatch_warning"
+      ],
+      "verification_ok": false,
+      "verification_skipped": true,
+      "verification_finding_codes": [
+        "verify.kicad_cli_missing"
+      ]
+    },
+    "build_and_verify_with_pinned_kicad": {
+      "exit_code": 0,
+      "ok": true,
+      "engine_ok": true,
+      "engine_errors": 0,
+      "engine_warnings": 5,
+      "verification_ok": true,
+      "verification_skipped": false,
+      "verification_errors": 0,
+      "verification_warnings": 4,
+      "verification_finding_codes": [
+        "drc.lib_footprint_issues",
+        "drc.lib_footprint_issues",
+        "drc.text_height",
+        "drc.text_height"
+      ]
+    },
+    "build_without_kicad": {
+      "exit_code": 1,
+      "ok": false,
+      "engine_ok": true,
+      "verification_ok": false,
+      "verification_skipped": true,
+      "verification_finding_codes": [
+        "verify.kicad_cli_missing"
+      ]
+    }
+  },
+  "known_findings": [
+    {
+      "code": "tsc.schematic_missing_sheet_warning",
+      "severity": "warning",
+      "meaning": "The small fragment has no schematic-sheet element.",
+      "action": "Add a reviewed sheet in a later electrically complete example."
+    },
+    {
+      "code": "tsc.source_pin_missing_trace_warning",
+      "severity": "warning",
+      "meaning": "Two pins are intentionally free because this is a one-net workflow fragment, not a powered LED circuit.",
+      "action": "Do not use this fixture as an electrical design or fabrication input."
+    },
+    {
+      "code": "tsc.supplier_footprint_mismatch_warning",
+      "severity": "warning",
+      "meaning": "The generic footprint geometry differs from the selected supplier footprint, once per component.",
+      "action": "Resolve and independently review exact package identity before manufacturing."
+    },
+    {
+      "code": "drc.lib_footprint_issues",
+      "severity": "warning",
+      "meaning": "The current KiCad environment does not register the generated tscircuit footprint library.",
+      "action": "Register or embed the generated library mapping before advanced editing."
+    },
+    {
+      "code": "drc.text_height",
+      "severity": "warning",
+      "meaning": "Generated reference text is below the current KiCad board-rule minimum.",
+      "action": "Apply qualified presentation rules before a manufacturing release."
+    },
+    {
+      "code": "verify.kicad_cli_missing",
+      "severity": "warning",
+      "meaning": "PhiCad Verify is unavailable when the independent kicad-cli is absent; the combined verdict is not a pass.",
+      "action": "Provide the exact pinned PHICAD_KICAD_CLI or PHICAD_BUILD."
+    }
+  ],
+  "claims_not_made": [
+    "This example is not fabrication-ready; it is intentionally electrically incomplete.",
+    "Native PhiCad materialization is unavailable in V1; exact Circuit JSON verification does not create an applied native revision.",
+    "Zero KiCad DRC errors is not evidence of electrical completeness or manufacturing correctness."
+  ]
+}

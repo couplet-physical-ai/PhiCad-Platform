@@ -1,0 +1,4 @@
+# Build products are workflow artifacts, not source inputs.
+dist/
+__pycache__/
+*.py[cod]

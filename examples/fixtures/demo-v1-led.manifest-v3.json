@@ -1,0 +1,119 @@
+{
+  "approval": {
+    "state": "pending"
+  },
+  "approval_state": "pending",
+  "artifact_hashes": {
+    "kicad-drc": "30ae1f0aa00f532c7df1f67e1bddf9ed47befb6193212abc1be5cc5e664039f6",
+    "kicad-local-settings": "3bb608177e8caac46d2162aede29b7441126a7cb28ae2b61c3498b22ad982c80",
+    "kicad-pcb": "8e6067d5f987b8639ec80015cea94e5ae5b755846e2754af9f50e5c4cd447bdb"
+  },
+  "artifacts": [
+    {
+      "kind": "kicad-drc",
+      "path": "demo-v1-led.drc.json",
+      "sha256": "30ae1f0aa00f532c7df1f67e1bddf9ed47befb6193212abc1be5cc5e664039f6"
+    },
+    {
+      "kind": "kicad-local-settings",
+      "path": "demo-v1-led.kicad_prl",
+      "sha256": "3bb608177e8caac46d2162aede29b7441126a7cb28ae2b61c3498b22ad982c80"
+    },
+    {
+      "kind": "kicad-pcb",
+      "path": "demo-v1-led.kicad_pcb",
+      "sha256": "8e6067d5f987b8639ec80015cea94e5ae5b755846e2754af9f50e5c4cd447bdb"
+    }
+  ],
+  "circuit_json": {
+    "hash": "3f3a7aa3d3a5f1c83dd11615813eba94e235f8878dc3e437c5e60a780b41d402",
+    "path": "demo-v1-led.circuit.json"
+  },
+  "circuit_json_hash": "3f3a7aa3d3a5f1c83dd11615813eba94e235f8878dc3e437c5e60a780b41d402",
+  "circuit_json_path": "demo-v1-led.circuit.json",
+  "configuration": {
+    "artifact_root": ".",
+    "evidence": "relocated real run; no checker rerun"
+  },
+  "design_id": "demo-v1-led",
+  "diagnostic_status": {
+    "kicad": "passed",
+    "tscircuit": "carried-input"
+  },
+  "diagnostics": {
+    "kicad": {
+      "errors": 0,
+      "info": 0,
+      "warnings": 4
+    },
+    "tscircuit": {
+      "errors": 0,
+      "info": 0,
+      "warnings": 5
+    }
+  },
+  "manifest_hash": "8c47d8ea747a0ccd40f5a5eebb5d81e885cc0d337394949991b475f31d80c5e6",
+  "manifest_version": 3,
+  "native_apply": {
+    "applied_revision": null,
+    "base_revision": null,
+    "plan_hash": "32858d81620c58199d2a69abf2206c02ba23fd6ef39072f3f61b1095d48babd2",
+    "plan_path": "demo-v1-led.apply-plan.json",
+    "rejections": [
+      {
+        "code": "unsupported_required_geometry",
+        "detail": "Circuit JSON copper route is not representable by Design IR routing",
+        "element": "pcb_trace"
+      },
+      {
+        "code": "unsupported_required_geometry",
+        "detail": "schematic layout is not representable by the synth schematic emitter",
+        "element": "schematic_component"
+      },
+      {
+        "code": "unsupported_required_geometry",
+        "detail": "schematic layout is not representable by the synth schematic emitter",
+        "element": "schematic_group"
+      },
+      {
+        "code": "unsupported_required_geometry",
+        "detail": "schematic layout is not representable by the synth schematic emitter",
+        "element": "schematic_port"
+      },
+      {
+        "code": "unsupported_required_geometry",
+        "detail": "schematic layout is not representable by the synth schematic emitter",
+        "element": "schematic_trace"
+      }
+    ],
+    "status": "rejected",
+    "undo_entries": 0
+  },
+  "native_artifact": {
+    "path": "demo-v1-led.kicad_pcb",
+    "revision": "unavailable-v1",
+    "sha256": "8e6067d5f987b8639ec80015cea94e5ae5b755846e2754af9f50e5c4cd447bdb"
+  },
+  "native_artifact_hash": "8e6067d5f987b8639ec80015cea94e5ae5b755846e2754af9f50e5c4cd447bdb",
+  "native_artifact_path": "demo-v1-led.kicad_pcb",
+  "native_revision": "unavailable-v1",
+  "source": {
+    "hash": "49b8d479c011bcbb8bf83d245f1afd6ab9e6afcc337eb97dda28a2f3a1434fe5",
+    "path": "../demo-v1-led.tsx"
+  },
+  "source_hash": "49b8d479c011bcbb8bf83d245f1afd6ab9e6afcc337eb97dda28a2f3a1434fe5",
+  "source_path": "../demo-v1-led.tsx",
+  "tool_versions": {
+    "@tscircuit/cli": "0.1.2084",
+    "@tscircuit/core": "0.0.1914",
+    "@tscircuit/eval": "0.0.1407",
+    "bun": "1.4.2",
+    "circuit-json": "0.0.491",
+    "kicad": "10.99.0",
+    "kicad-cli": "10.99.0",
+    "phicad": "0.1.0-dev.1",
+    "phicad-platform": "0.1.0-dev.1",
+    "service-contract": "1",
+    "tscircuit": "0.0.2561"
+  }
+}
